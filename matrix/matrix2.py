@@ -1,5 +1,7 @@
 class Matrix:
     """
+    # First attempt
+    
     def __init__(self, matrix_string):
         self.matrix = matrix_string.split(sep='\n') if matrix_string.find('\n') > 0 else [matrix_string]
         self.matrix = [list(map(int, self.matrix[i].split())) for i in range(len(self.matrix))]
@@ -10,7 +12,9 @@ class Matrix:
     def column(self, index):
         changed = [[row[i] for row in self.matrix] for i in range(len(self.matrix[0]))]
         return changed[index-1]
-    -
+    -----------------------------------------------------------------------------------------------------------------
+    # Mentor input
+    
     Looking good!
 
     L3: Python provides a str.splitlines method that you may want to consider using.
@@ -23,6 +27,8 @@ class Matrix:
     logic clean since one variable isn't used for unrelated things. self.matrix is used to store two distinct data
     types.
     ------------------------------------------------------------------------------------------------------------------
+    # Second attempt
+    
     def __init__(self, matrix_string):
         self.matrix = [list(map(int, i.split())) for i in matrix_string.splitlines()]
 
@@ -31,20 +37,23 @@ class Matrix:
 
     def column(self, index):
         return list(map(list, zip(*self.matrix)))[index-1]
-    -
+    -----------------------------------------------------------------------------------------------------------------
+    # Mentor input
+    
     L3: This solution combines functions that act on lists (list(map(..))) with list comprehensions. Could you solve
     this with the consistent use of just list comprehensions?
     L9: This transposes the entire matrix then selects just one row, discarding the rest of the data. Do you need to
     actually transpose the matrix?
     -------------------------------------------------------------------------------------------------------------------
     """
+    # Final Code
+    
     def __init__(self, matrix_string):
         self.matrix = [[int(i) for i in j.split()] for j in matrix_string.splitlines()]
-
+    
     def row(self, index):
         return self.matrix[index-1]
-
+    
     def column(self, index):
         return [[row[i] for row in self.matrix] for i in self.matrix[index-1]]
 
-# exercism submit Exercism/python/matrix/matrix.py
